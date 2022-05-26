@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 
 # region Variables
 
+
 driver = webdriver.Chrome()
 action = webdriver.ActionChains(driver)
 # Resources
@@ -32,8 +33,10 @@ DeuteriumMineUpgradeXPATH = "/html/body/div[6]/div[3]/div[2]/div/div[2]/ul/li[3]
 MinesUpgradePath= [MetalMineUpgradeXPATH, CrystalMineUpgradeXPATH, DeuteriumMineUpgradeXPATH]
 SolarPlantUpgradeXPATH = "/html/body/div[6]/div[3]/div[2]/div/div[2]/ul/li[4]/span/button"
 
+
 # endregion
 # region Initialization
+
 
 def init():
     driver.maximize_window()
@@ -55,8 +58,10 @@ def switchTab():
     driver.close()
     driver.switch_to.window(child)
 
+
 # endregion
 # region Available Resources Retrieval
+
 
 def retrieveResources():
     global Metal
@@ -73,8 +78,10 @@ def goToResourcesTab():
     driver.find_element(By.CSS_SELECTOR, '#menuTable > li:nth-child(2) > a').click()
     time.sleep(1)
 
+
 # endregion
 # region Resources Production Retrieval
+
 
 def goToProductionTab():
     driver.find_element(By.XPATH, '/html/body/div[6]/div[2]/div[2]/div/ul/li[2]/span/a/div').click()
@@ -89,8 +96,10 @@ def retrieveProduction():
     CrystalProd = int(driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[2]/div[2]/div[2]/div[2]/div[2]/form/table/tbody/tr[20]/td[3]/span').text.replace('.', ''))
     DeuteriumProd = int(driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[2]/div[2]/div[2]/div[2]/div[2]/form/table/tbody/tr[20]/td[4]/span').text.replace('.', ''))
 
+
 # endregion
 # region Time Conversion
+
 
 def convertTime(string):
     totalTime = 0
@@ -116,8 +125,10 @@ def retrieveTimeValue(string, index, char):
     index += 2
     return buffer, index
 
+
 # endregion
 # region Upgrades Cost Retrieval
+
 
 def retrieveMinesCosts():
     global Mines
@@ -138,8 +149,10 @@ def retrieveSolarPlantCost():
     SolarPlant[1] = int(driver.find_element(By.XPATH, "/html/body/div[6]/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/div/div[1]/ul/li[1]").text.replace('.', ''))
     SolarPlant[2] = int(driver.find_element(By.XPATH, "/html/body/div[6]/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/div/div[1]/ul/li[2]").text.replace('.', ''))
 
+
 # endregion
 # region Debug Values
+
 
 def printValues():
     print("Métal : " + str(Metal) + " | Cristal : " + str(Crystal) + " | Deutérium : " + str(Deuterium) + " | Énergie : " + str(Energy))
@@ -149,8 +162,10 @@ def printValues():
     print("Cout pour augmenter la centrale électrique solaire: " + str(SolarPlant[0]) + " Métal | " + str(SolarPlant[1]) + " Cristal")
     print("\nProductions - Métal : " + str(MetalProd) + " | Cristal : " + str(CrystalProd) + " | Deutérium : " + str(DeuteriumProd))
 
+
 # endregion
 # region Upgrade Process
+
 
 def tryUpgrade():
     computeCheapestUpgrade()
@@ -160,6 +175,9 @@ def tryUpgrade():
             time.sleep(Mines[MineIndexForUpgrade][0] + 5)
             Update()
         else:
+            goToProductionTab()
+            retrieveProduction()
+            goToResourcesTab()
             WaitForUpgrade(Mines[MineIndexForUpgrade][1], Mines[MineIndexForUpgrade][2])
     else:
         if Metal > SolarPlant[1] and Crystal > SolarPlant[2]:
@@ -167,6 +185,9 @@ def tryUpgrade():
             time.sleep(SolarPlant[0] + 5)
             Update()
         else:
+            goToProductionTab()
+            retrieveProduction()
+            goToResourcesTab()
             WaitForUpgrade(SolarPlant[1], SolarPlant[2])
 
 
@@ -192,23 +213,20 @@ def computeCheapestUpgrade():
             index = i
     MineIndexForUpgrade = index
 
+
 # endregion
 # region Update Method
 
+
 def Update():
-    goToProductionTab()
-    retrieveProduction()
     goToResourcesTab()
     retrieveResources()
     retrieveMinesCosts()
     retrieveSolarPlantCost()
-    print(str(Mines[0][0]) + " " + str(Mines[1][0]) + " " + str(Mines[2][0]))
-    print(str(SolarPlant[0]))
-    # tryUpgrade()
+    tryUpgrade()
+
 
 # endregion
-
-
 init()
 switchTab()
 Update()
