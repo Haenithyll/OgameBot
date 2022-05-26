@@ -38,7 +38,7 @@ def init():
     driver.find_element(By.CSS_SELECTOR, '#loginRegisterTabs > ul > li:nth-child(1)').click()
     time.sleep(1)
     driver.find_element(By.CSS_SELECTOR, '#loginForm > div:nth-child(1) > div > input[type=email]').send_keys('paul_snauwaert@yahoo.fr')
-    driver.find_element(By.CSS_SELECTOR, '#loginForm > div:nth-child(2) > div > input[type=password]').send_keys('Destroyer59')
+    driver.find_element(By.CSS_SELECTOR, '#loginForm > div:nth-child(2) > div > input[type=password]').send_keys('MotDePasseDeTest123')
     driver.find_element(By.CSS_SELECTOR, '#loginForm > p > button.button.button-primary.button-lg').click()
     time.sleep(2)
     driver.find_element(By.CSS_SELECTOR,'body > div:nth-child(5) > div > div > span.cookiebanner4 > button:nth-child(2)').click()
