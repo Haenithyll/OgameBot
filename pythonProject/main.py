@@ -3,6 +3,8 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
+# region Variables
+
 driver = webdriver.Chrome()
 action = webdriver.ActionChains(driver)
 # Resources
@@ -30,6 +32,8 @@ DeuteriumMineUpgradeXPATH = "/html/body/div[6]/div[3]/div[2]/div/div[2]/ul/li[3]
 MinesUpgradePath= [MetalMineUpgradeXPATH, CrystalMineUpgradeXPATH, DeuteriumMineUpgradeXPATH]
 SolarPlantUpgradeXPATH = "/html/body/div[6]/div[3]/div[2]/div/div[2]/ul/li[4]/span/button"
 
+# endregion
+# region Initialization
 
 def init():
     driver.maximize_window()
@@ -51,6 +55,8 @@ def switchTab():
     driver.close()
     driver.switch_to.window(child)
 
+# endregion
+# region Available Resources Retrieval
 
 def retrieveResources():
     global Metal
@@ -67,21 +73,12 @@ def goToResourcesTab():
     driver.find_element(By.CSS_SELECTOR, '#menuTable > li:nth-child(2) > a').click()
     time.sleep(1)
 
+# endregion
+# region Resources Production Retrieval
 
 def goToProductionTab():
     driver.find_element(By.XPATH, '/html/body/div[6]/div[2]/div[2]/div/ul/li[2]/span/a/div').click()
     time.sleep(1)
-
-
-def retrieveMinesCosts():
-    global Mines
-    for i in range(3):
-        driver.find_element(By.XPATH, f"/html/body/div[6]/div[3]/div[2]/div/div[2]/ul/li[{i + 1}]/span").click()
-        time.sleep(1)
-        Mines[i][0] = int(driver.find_element(By.XPATH, "/html/body/div[6]/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/div/ul/li[1]/time").text.replace('s', ''))
-        Mines[i][1] = int(driver.find_element(By.XPATH, "/html/body/div[6]/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/div/div[1]/ul/li[1]").text.replace('.', ''))
-        Mines[i][2] = int(driver.find_element(By.XPATH, "/html/body/div[6]/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/div/div[1]/ul/li[2]").text.replace('.', ''))
-        Mines[i][3] = int(driver.find_element(By.XPATH, "/html/body/div[6]/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/div/ul/li[2]/span").text.replace('.', ''))
 
 
 def retrieveProduction():
@@ -92,15 +89,57 @@ def retrieveProduction():
     CrystalProd = int(driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[2]/div[2]/div[2]/div[2]/div[2]/form/table/tbody/tr[20]/td[3]/span').text.replace('.', ''))
     DeuteriumProd = int(driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[2]/div[2]/div[2]/div[2]/div[2]/form/table/tbody/tr[20]/td[4]/span').text.replace('.', ''))
 
+# endregion
+# region Time Conversion
+
+def convertTime(string):
+    totalTime = 0
+    index = 0
+    if 'h' in string:
+        totalTime += int(retrieveTimeValue(string, 0, 'h')[0]) * 3600
+        index = retrieveTimeValue(string, 0, 'h')[1]
+    if 'm' in string:
+        totalTime += int(retrieveTimeValue(string, index, 'm')[0]) * 60
+        index = retrieveTimeValue(string, index, 'm')[1]
+    if 's' in string:
+        totalTime += int(retrieveTimeValue(string, index, 's')[0])
+    return totalTime
+
+
+def retrieveTimeValue(string, index, char):
+    buffer = ""
+    c = string[index]
+    while c != char:
+        buffer += c
+        index += 1
+        c = string[index]
+    index += 2
+    return buffer, index
+
+# endregion
+# region Upgrades Cost Retrieval
+
+def retrieveMinesCosts():
+    global Mines
+    for i in range(3):
+        driver.find_element(By.XPATH, f"/html/body/div[6]/div[3]/div[2]/div/div[2]/ul/li[{i + 1}]/span").click()
+        time.sleep(1)
+        Mines[i][0] = convertTime(driver.find_element(By.XPATH, "/html/body/div[6]/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/div/ul/li[1]/time").text)
+        Mines[i][1] = int(driver.find_element(By.XPATH, "/html/body/div[6]/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/div/div[1]/ul/li[1]").text.replace('.', ''))
+        Mines[i][2] = int(driver.find_element(By.XPATH, "/html/body/div[6]/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/div/div[1]/ul/li[2]").text.replace('.', ''))
+        Mines[i][3] = int(driver.find_element(By.XPATH, "/html/body/div[6]/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/div/ul/li[2]/span").text.replace('.', ''))
+
 
 def retrieveSolarPlantCost():
     global SolarPlant
     driver.find_element(By.XPATH, "/html/body/div[6]/div[3]/div[2]/div/div[2]/ul/li[4]/span").click()
     time.sleep(1)
-    SolarPlant[0] = int(driver.find_element(By.XPATH, "/html/body/div[6]/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/div/ul/li[1]/time").text.replace('s', ''))
+    SolarPlant[0] = convertTime(driver.find_element(By.XPATH, "/html/body/div[6]/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/div/ul/li[1]/time").text)
     SolarPlant[1] = int(driver.find_element(By.XPATH, "/html/body/div[6]/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/div/div[1]/ul/li[1]").text.replace('.', ''))
     SolarPlant[2] = int(driver.find_element(By.XPATH, "/html/body/div[6]/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/div/div[1]/ul/li[2]").text.replace('.', ''))
 
+# endregion
+# region Debug Values
 
 def printValues():
     print("Métal : " + str(Metal) + " | Cristal : " + str(Crystal) + " | Deutérium : " + str(Deuterium) + " | Énergie : " + str(Energy))
@@ -110,6 +149,8 @@ def printValues():
     print("Cout pour augmenter la centrale électrique solaire: " + str(SolarPlant[0]) + " Métal | " + str(SolarPlant[1]) + " Cristal")
     print("\nProductions - Métal : " + str(MetalProd) + " | Cristal : " + str(CrystalProd) + " | Deutérium : " + str(DeuteriumProd))
 
+# endregion
+# region Upgrade Process
 
 def tryUpgrade():
     computeCheapestUpgrade()
@@ -151,6 +192,8 @@ def computeCheapestUpgrade():
             index = i
     MineIndexForUpgrade = index
 
+# endregion
+# region Update Method
 
 def Update():
     goToProductionTab()
@@ -159,7 +202,11 @@ def Update():
     retrieveResources()
     retrieveMinesCosts()
     retrieveSolarPlantCost()
-    tryUpgrade()
+    print(str(Mines[0][0]) + " " + str(Mines[1][0]) + " " + str(Mines[2][0]))
+    print(str(SolarPlant[0]))
+    # tryUpgrade()
+
+# endregion
 
 
 init()
