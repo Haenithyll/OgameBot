@@ -177,8 +177,8 @@ def tryUpgrade():
         else:
             goToProductionTab()
             retrieveProduction()
-            goToResourcesTab()
             WaitForUpgrade(Mines[MineIndexForUpgrade][1], Mines[MineIndexForUpgrade][2])
+            goToResourcesTab()
     else:
         if Metal > SolarPlant[1] and Crystal > SolarPlant[2]:
             driver.find_element(By.XPATH, SolarPlantUpgradeXPATH).click()
@@ -187,8 +187,8 @@ def tryUpgrade():
         else:
             goToProductionTab()
             retrieveProduction()
-            goToResourcesTab()
             WaitForUpgrade(SolarPlant[1], SolarPlant[2])
+            goToResourcesTab()
 
 
 def WaitForUpgrade(metalNeeded, crystalNeeded):
