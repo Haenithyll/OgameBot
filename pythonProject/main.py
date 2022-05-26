@@ -92,9 +92,9 @@ def retrieveProduction():
     global MetalProd
     global CrystalProd
     global DeuteriumProd
-    MetalProd = int(driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[2]/div[2]/div[2]/div[2]/div[2]/form/table/tbody/tr[20]/td[2]/span').text.replace('.', ''))
-    CrystalProd = int(driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[2]/div[2]/div[2]/div[2]/div[2]/form/table/tbody/tr[20]/td[3]/span').text.replace('.', ''))
-    DeuteriumProd = int(driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[2]/div[2]/div[2]/div[2]/div[2]/form/table/tbody/tr[20]/td[4]/span').text.replace('.', ''))
+    MetalProd = int(driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[2]/div[2]/div[2]/div[2]/div[2]/form/table/tbody/tr[19]/td[2]/span').text.replace('.', ''))
+    CrystalProd = int(driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[2]/div[2]/div[2]/div[2]/div[2]/form/table/tbody/tr[19]/td[3]/span').text.replace('.', ''))
+    DeuteriumProd = int(driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[2]/div[2]/div[2]/div[2]/div[2]/form/table/tbody/tr[19]/td[4]/span').text.replace('.', ''))
 
 
 # endregion
@@ -159,7 +159,7 @@ def printValues():
     print("\nCout pour augmenter la mine de métal : " + str(MetalMine[0]) + " Métal | " + str(MetalMine[1]) + " Cristal | " + str(MetalMine[2]) + " Énergie")
     print("Cout pour augmenter la mine de cristal : " + str(CrystalMine[0]) + " Métal | " + str(CrystalMine[1]) + " Cristal | " + str(CrystalMine[2]) + " Énergie")
     print("Cout pour augmenter la mine de deutérium : " + str(DeuteriumMine[0]) + " Métal | " + str(DeuteriumMine[1]) + " Cristal | " + str(DeuteriumMine[2]) + " Énergie")
-    print("Cout pour augmenter la centrale électrique solaire: " + str(SolarPlant[0]) + " Métal | " + str(SolarPlant[1]) + " Cristal")
+    print("Cout pour augmenter la centrale électrique solaire: " + str(SolarPlant[1]) + " Métal | " + str(SolarPlant[2]) + " Cristal")
     print("\nProductions - Métal : " + str(MetalProd) + " | Cristal : " + str(CrystalProd) + " | Deutérium : " + str(DeuteriumProd))
 
 
@@ -168,6 +168,7 @@ def printValues():
 
 
 def tryUpgrade():
+    print("TryUpgrade")
     computeCheapestUpgrade()
     if Energy > Mines[MineIndexForUpgrade][3]:
         if Metal > Mines[MineIndexForUpgrade][1] and Crystal > Mines[MineIndexForUpgrade][2]:
@@ -178,7 +179,6 @@ def tryUpgrade():
             goToProductionTab()
             retrieveProduction()
             WaitForUpgrade(Mines[MineIndexForUpgrade][1], Mines[MineIndexForUpgrade][2])
-            goToResourcesTab()
     else:
         if Metal > SolarPlant[1] and Crystal > SolarPlant[2]:
             driver.find_element(By.XPATH, SolarPlantUpgradeXPATH).click()
@@ -188,21 +188,25 @@ def tryUpgrade():
             goToProductionTab()
             retrieveProduction()
             WaitForUpgrade(SolarPlant[1], SolarPlant[2])
-            goToResourcesTab()
 
 
 def WaitForUpgrade(metalNeeded, crystalNeeded):
+    print("WaitForUpgrade")
     timeToGetMetal = 0
     timeToGetCrystal = 0
     if not Metal > metalNeeded:
         timeToGetMetal = (metalNeeded - Metal)/MetalProd*3600
     if not Crystal > crystalNeeded:
         timeToGetCrystal = (crystalNeeded - Crystal)/CrystalProd*3600
-    time.sleep(max(timeToGetMetal, timeToGetCrystal))
+    timetoWait = max(timeToGetMetal, timeToGetCrystal)
+    print(timetoWait)
+    time.sleep(timetoWait)
+    goToResourcesTab()
     tryUpgrade()
 
 
 def computeCheapestUpgrade():
+    print("ComputeCheapestUpgrade")
     global MineIndexForUpgrade
     cheapest = 0
     index = 0
@@ -230,5 +234,7 @@ def Update():
 init()
 switchTab()
 Update()
+# goToProductionTab()
+# retrieveProduction()
 # printValues()
 # Upgrade()
