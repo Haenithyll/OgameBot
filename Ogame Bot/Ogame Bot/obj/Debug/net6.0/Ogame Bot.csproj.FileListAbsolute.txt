@@ -1,0 +1,18 @@
+C:\Users\Paul\source\repos\Ogame Bot\Ogame Bot\bin\Debug\net6.0\Ogame Bot.exe
+C:\Users\Paul\source\repos\Ogame Bot\Ogame Bot\bin\Debug\net6.0\Ogame Bot.deps.json
+C:\Users\Paul\source\repos\Ogame Bot\Ogame Bot\bin\Debug\net6.0\Ogame Bot.runtimeconfig.json
+C:\Users\Paul\source\repos\Ogame Bot\Ogame Bot\bin\Debug\net6.0\Ogame Bot.dll
+C:\Users\Paul\source\repos\Ogame Bot\Ogame Bot\bin\Debug\net6.0\Ogame Bot.pdb
+C:\Users\Paul\source\repos\Ogame Bot\Ogame Bot\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\Paul\source\repos\Ogame Bot\Ogame Bot\bin\Debug\net6.0\WebDriver.dll
+C:\Users\Paul\source\repos\Ogame Bot\Ogame Bot\obj\Debug\net6.0\Ogame Bot.csproj.AssemblyReference.cache
+C:\Users\Paul\source\repos\Ogame Bot\Ogame Bot\obj\Debug\net6.0\Ogame Bot.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Paul\source\repos\Ogame Bot\Ogame Bot\obj\Debug\net6.0\Ogame Bot.AssemblyInfoInputs.cache
+C:\Users\Paul\source\repos\Ogame Bot\Ogame Bot\obj\Debug\net6.0\Ogame Bot.AssemblyInfo.cs
+C:\Users\Paul\source\repos\Ogame Bot\Ogame Bot\obj\Debug\net6.0\Ogame Bot.csproj.CoreCompileInputs.cache
+C:\Users\Paul\source\repos\Ogame Bot\Ogame Bot\obj\Debug\net6.0\Ogame Bot.csproj.CopyComplete
+C:\Users\Paul\source\repos\Ogame Bot\Ogame Bot\obj\Debug\net6.0\Ogame Bot.dll
+C:\Users\Paul\source\repos\Ogame Bot\Ogame Bot\obj\Debug\net6.0\refint\Ogame Bot.dll
+C:\Users\Paul\source\repos\Ogame Bot\Ogame Bot\obj\Debug\net6.0\Ogame Bot.pdb
+C:\Users\Paul\source\repos\Ogame Bot\Ogame Bot\obj\Debug\net6.0\Ogame Bot.genruntimeconfig.cache
+C:\Users\Paul\source\repos\Ogame Bot\Ogame Bot\obj\Debug\net6.0\ref\Ogame Bot.dll

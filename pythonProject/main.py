@@ -13,6 +13,11 @@ Metal = 0
 Crystal = 0
 Deuterium = 0
 Energy = 0
+# Capacity
+MaxMetal = 0
+MaxCrystal = 0
+MaxDeuterium = 0
+StoragesCapacity = [MaxMetal, MaxCrystal, MaxDeuterium]
 # Production
 MetalProd = 0
 CrystalProd = 0
@@ -25,14 +30,70 @@ Mines = [MetalMine, CrystalMine, DeuteriumMine]
 MineIndexForUpgrade = 0
 # [time, metal, crystal]
 SolarPlant = [0, 0, 0]
+MetalStorage = [0, 0, 0]
+CrystalStorage = [0, 0, 0]
+DeuteriumStorage = [0, 0, 0]
+StoragesCost = [MetalStorage, CrystalStorage, DeuteriumStorage]
 
 # Buildings Paths
 MetalMineUpgradeXPATH = "/html/body/div[6]/div[3]/div[2]/div/div[2]/ul/li[1]/span/button"
 CrystalMineUpgradeXPATH = "/html/body/div[6]/div[3]/div[2]/div/div[2]/ul/li[2]/span/button"
 DeuteriumMineUpgradeXPATH = "/html/body/div[6]/div[3]/div[2]/div/div[2]/ul/li[3]/span/button"
-MinesUpgradePath= [MetalMineUpgradeXPATH, CrystalMineUpgradeXPATH, DeuteriumMineUpgradeXPATH]
+MinesUpgradePath = [MetalMineUpgradeXPATH, CrystalMineUpgradeXPATH, DeuteriumMineUpgradeXPATH]
 SolarPlantUpgradeXPATH = "/html/body/div[6]/div[3]/div[2]/div/div[2]/ul/li[4]/span/button"
 
+
+# Requirements [[Buildings], [Techs]]
+
+# Technologies
+# Fundamentals
+EnergyTech = [[0, 0, 1], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+LaserTech = [[0, 0, 1], [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+IonTech = [[0, 0, 4], [4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+HyperspaceTech = [[0, 0, 7], [5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0]]
+PlasmaTech = [[0, 0, 4], [8, 10, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+# Propulsion
+CombustionTech = [[0, 0, 1], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+ImpulsionTech = [[0, 0, 2], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+HyperspacePropulsionTech = [[0, 0, 7], [5, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0]]
+# Advanced
+SpyTech = [[0, 0, 3], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+ComputerTech = [[0, 0, 1], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+AstrophysicsTech = [[0, 0, 3], [0, 0, 0, 0, 0, 0, 3, 0, 4, 0, 0, 0, 0, 0, 0, 0]]
+IRNTech = [[0, 0, 10], [5, 0, 0, 8, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 5, 0]]
+GravitonTech = [[0, 0, 12], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+# Combat
+WeaponTech = [[0, 0, 4], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+ShieldTech = [[0, 0, 6], [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+ArmorTech = [[0, 0, 2], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+
+# Ships
+# Combat
+LightFighter = [[2, 1, 1], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+HeavyFighter = [[2, 3, 2], [1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2]]
+Cruiser = [[2, 5, 2], [4, 5, 2, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+BattleShip = [[2, 7, 7], [5, 0, 0, 3, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 5, 0]]
+Hunter = [[2, 8, 7], [5, 12, 0, 5, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 5, 0]]
+Bomber = [[2, 8, 4], [8, 10, 5, 0, 5, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+Destroyer = [[2, 9, 7], [5, 0, 0, 5, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 5, 0]]
+DeathStar = [[2, 12, 12], [5, 0, 0, 6, 0, 0, 0, 7, 0, 0, 0, 0, 1, 0, 5, 0]]
+# Civil
+LightCarrier = [[2, 2, 1], [1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+HeavyCarrier = [[2, 4, 1], [1, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+ColonisationShip = [[2, 4, 2], [1, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+Recycler = [[2, 4, 6], [3, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0]]
+SpyingProbe = [[2, 3, 3], [1, 0, 0, 0, 0, 3, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0]]
+Satellite = [[2, 2, 0], [0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+
+# Defenses
+MissileLauncher = [[2, 1, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+LightLaserArtillery = [[2, 2, 1], [2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+HeavyLaserArtillery = [[2, 4, 1], [3, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+GaussCanon = [[2, 6, 6], [6, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 0]]
+IonArtillery = [[2, 4, 4], [4, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 0]]
+PlasmaLauncher = [[2, 8, 4], [8, 10, 5, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 0]]
+SmallShield = [[2, 1, 6], [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0]]
+BigShield = [[2, 6, 6], [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0]]
 
 # endregion
 # region Initialization
@@ -48,7 +109,7 @@ def init():
     driver.find_element(By.CSS_SELECTOR, '#loginForm > div:nth-child(2) > div > input[type=password]').send_keys('MotDePasseDeTest123')
     driver.find_element(By.CSS_SELECTOR, '#loginForm > p > button.button.button-primary.button-lg').click()
     time.sleep(2)
-    driver.find_element(By.CSS_SELECTOR,'body > div:nth-child(5) > div > div > span.cookiebanner4 > button:nth-child(2)').click()
+    driver.find_element(By.CSS_SELECTOR, 'body > div:nth-child(5) > div > div > span.cookiebanner4 > button:nth-child(2)').click()
     driver.find_element(By.CSS_SELECTOR, '#joinGame > button').click()
 
 
@@ -63,20 +124,21 @@ def switchTab():
 # region Available Resources Retrieval
 
 
+def goToResourcesTab():
+    driver.find_element(By.CSS_SELECTOR, '#menuTable > li:nth-child(2) > a').click()
+    time.sleep(1)
+
+
 def retrieveResources():
     global Metal
     global Crystal
     global Deuterium
     global Energy
+    goToResourcesTab()
     Metal = int(driver.find_element(By.CSS_SELECTOR, '#resources_metal').text.replace('.', ''))
     Crystal = int(driver.find_element(By.CSS_SELECTOR, '#resources_crystal').text.replace('.', ''))
     Deuterium = int(driver.find_element(By.CSS_SELECTOR, '#resources_deuterium').text.replace('.', ''))
     Energy = int(driver.find_element(By.CSS_SELECTOR, '#resources_energy').text)
-
-
-def goToResourcesTab():
-    driver.find_element(By.CSS_SELECTOR, '#menuTable > li:nth-child(2) > a').click()
-    time.sleep(1)
 
 
 # endregion
@@ -89,12 +151,20 @@ def goToProductionTab():
 
 
 def retrieveProduction():
+    goToProductionTab()
     global MetalProd
     global CrystalProd
     global DeuteriumProd
     MetalProd = int(driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[2]/div[2]/div[2]/div[2]/div[2]/form/table/tbody/tr[19]/td[2]/span').text.replace('.', ''))
     CrystalProd = int(driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[2]/div[2]/div[2]/div[2]/div[2]/form/table/tbody/tr[19]/td[3]/span').text.replace('.', ''))
     DeuteriumProd = int(driver.find_element(By.XPATH, '/html/body/div[2]/div[2]/div[2]/div[2]/div[2]/div[2]/div[2]/form/table/tbody/tr[19]/td[4]/span').text.replace('.', ''))
+
+
+def retrieveCapacity():
+    goToProductionTab()
+    global StoragesCapacity
+    for i in range(3):
+        StoragesCapacity[i] = int(driver.find_element(By.XPATH, f"/html/body/div[2]/div[2]/div[2]/div[2]/div[2]/div[2]/div[2]/form/table/tbody/tr[18]/td[{i + 2}]/span").text.replace('.', ''))
 
 
 # endregion
@@ -150,6 +220,27 @@ def retrieveSolarPlantCost():
     SolarPlant[2] = int(driver.find_element(By.XPATH, "/html/body/div[6]/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/div/div[1]/ul/li[2]").text.replace('.', ''))
 
 
+def retrieveStorageCost():
+    global StoragesCost
+    for i in range(3):
+        driver.find_element(By.XPATH, f"/html/body/div[6]/div[3]/div[2]/div/div[2]/ul/li[{i + 8}]/span").click()
+        time.sleep(1)
+        StoragesCost[i][0] = convertTime(driver.find_element(By.XPATH, "/html/body/div[6]/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/div/ul/li/time").text)
+        children = driver.find_elements(By.XPATH, "/html/body/div[6]/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/div/div[1]/ul/li")
+        for j in range(len(children)):
+            if retrieveResourceType(children[j].get_attribute("aria-label")) == "Métal" :
+                StoragesCost[i][1] = int(children[j].text.replace('.', ''))
+            if retrieveResourceType(children[j].get_attribute("aria-label")) == "Cristal" :
+                StoragesCost[i][2] = int(children[j].text.replace('.', ''))
+
+
+def retrieveResourceType(string):
+    newString = string.replace('.', '')
+    newString = newString.replace(' ', '')
+    for i in range(10):
+        newString = newString.replace(f"{ i }", '')
+    return newString
+
 # endregion
 # region Debug Values
 
@@ -167,8 +258,11 @@ def printValues():
 # region Upgrade Process
 
 
+# def QueueUpgrade(XPATH):
+
 def tryUpgrade():
     print("TryUpgrade")
+    goToResourcesTab()
     computeCheapestUpgrade()
     if Energy > Mines[MineIndexForUpgrade][3]:
         if Metal > Mines[MineIndexForUpgrade][1] and Crystal > Mines[MineIndexForUpgrade][2]:
@@ -176,7 +270,6 @@ def tryUpgrade():
             time.sleep(Mines[MineIndexForUpgrade][0] + 5)
             Update()
         else:
-            goToProductionTab()
             retrieveProduction()
             WaitForUpgrade(Mines[MineIndexForUpgrade][1], Mines[MineIndexForUpgrade][2])
     else:
@@ -185,7 +278,6 @@ def tryUpgrade():
             time.sleep(SolarPlant[0] + 5)
             Update()
         else:
-            goToProductionTab()
             retrieveProduction()
             WaitForUpgrade(SolarPlant[1], SolarPlant[2])
 
@@ -202,7 +294,7 @@ def WaitForUpgrade(metalNeeded, crystalNeeded):
     print(timetoWait)
     time.sleep(timetoWait)
     goToResourcesTab()
-    tryUpgrade()
+    Update()
 
 
 def computeCheapestUpgrade():
@@ -219,14 +311,24 @@ def computeCheapestUpgrade():
 
 
 # endregion
+# region Storage Management
+
+
+# def CheckStorage():
+# if Metal == MetalStorage
+
+
+# endregion
 # region Update Method
 
 
 def Update():
-    goToResourcesTab()
     retrieveResources()
     retrieveMinesCosts()
     retrieveSolarPlantCost()
+    retrieveStorageCost()
+    retrieveCapacity()
+    # CheckStorage()
     tryUpgrade()
 
 
